@@ -18,3 +18,39 @@ Map
     height: 800px;
  }
  #map { position:absolute; top:0; height: 500px; width:100%;}
+
+
+/* D3 stuff */
+.state {fill: #ddd;}
+.state.MN { fill: #ddc; }
+.state.MO { fill: #cdd; }
+.state.MI { fill: #cdc; }
+.state.MS { fill: #dcd; }
+
+.state-boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.bubble {
+  fill-opacity: .5;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.bubble :hover {
+  stroke: red;
+}
+
+.legend circle {
+  fill: none;
+  stroke: #ccc;
+}
+
+.legend text {
+  fill: #777;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
