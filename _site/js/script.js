@@ -43,23 +43,25 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
   svg.selectAll(".state")
     .data(topojson.feature(us, us.objects.us_10m).features)
     .enter().append("path")
-      .attr("class", function(d) {return "state " + d.id; })
-     
-
+      .attr("class", function(d) {return "state " + d.id; });
+      // .attr("d", path);
 
   svg.append("path")
     .datum(topojson.mesh(us, us.objects.us_10m, function(a,b) {return a !== b;}))
-    .attr("class", "state-boundary")
+    .attr("class", "state-boundary");
+    // .attr("d", path);
 
   svg.append("g")
-    .attr("class", "bubble")
+    .attr("class", "bubbles")
   .selectAll("circle")
-    .data(topojson.feature(us, us.objects.us_10m).features
-      .sort(function(a, b) { return b.properties.total - a.properties.total; }))
+    .data(topojson.feature(us, us.objects.us_10m).features)
   .enter().append("circle")
-    .attr("transform", function(d) { 
-    	return "translate(" + path.centroid(d) + ")"; })
-    .attr("r", function(d) { return radius(d.properties.total)});
+    .attr("class","bubble")
+    .attr("text", function(d){ return d.properties.name});
+    // .attr("transform", function(d) { 
+    // 	return "translate(" + path.centroid(d) + ")"; })
+    // .attr("r", function(d) { return radius(d.properties.total)})
+    // .attr("text", function(d){ return d.properties.name});
 
 
     function resize() {
@@ -79,13 +81,13 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
     	svg.selectAll('path.state-boundary')
     		.attr("d", path);
 
-    	svg.selectAll("circle")
-    		.data(topojson.feature(us, us.objects.us_10m).features)
+    	svg.selectAll("circle.bubble")
+    		.data(topojson.feature(us, us.objects.us_10m).features
+          .sort(function(a, b) { return b.properties.total - a.properties.total; }))
 			.attr("transform", function(d) { 
-				console.log(path.centroid(d));
-    			return "translate(" + path.centroid(d) + ")"; })
-    		.attr("r", function(d) { return radius(d.properties.total)});
-
+				// console.log(path.centroid(d));
+  			return "translate(" + path.centroid(d) + ")"; })
+  		.attr("r", function(d) { return radius(d.properties.total)});
 
 
 	    console.log(width);

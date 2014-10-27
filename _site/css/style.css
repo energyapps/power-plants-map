@@ -45,13 +45,13 @@ body {
   stroke-linecap: round;
 }
 
-.bubble {
+.bubbles {
   fill-opacity: .5;
   stroke: #fff;
   stroke-width: .5px;
 }
 
-.bubble :hover {
+.bubbles :hover {
   stroke: red;
 }
 
