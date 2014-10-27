@@ -1,7 +1,7 @@
-var margin = 40,
-    width = parseInt(d3.select("#map_container").style("width")) - margin*2,
-    
-    height = parseInt(d3.select("#map_container").style("height")) - margin*2;
+var margin = 0,
+    width = parseInt(d3.select("#master_container").style("width")) - margin*2,
+    height = width / 2;
+    // height = parseInt(d3.select("#map_container").style("height")) - margin*2;
 
 // var width = 960,
 //     height = 600;
@@ -19,21 +19,19 @@ var svg = d3.select("#map_container")
 var radius = d3.scale.sqrt()
     .domain([0, 1000])
     .range([10, 25]);
+    // .domain([0, 3000])
+    // .range([5, 15]);    
 
 
 var legend = svg.append("g")
-    .attr("class", "legend")
-    .attr("transform", "translate(" + (width - 50) + "," + (height - 20) + ")")
+    .attr("class", "legend")    
   .selectAll("g")
     .data([1000, 3000, 6000])
   .enter().append("g");
 
 legend.append("circle")
-    .attr("cy", function(d) { return -radius(d); })
-    .attr("r", radius);
 
 legend.append("text")
-    .attr("y", function(d) { return -2 * radius(d); })
     .attr("dy", "1.3em")
     .text(d3.format(".1s"));
 
@@ -65,15 +63,39 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
 
     function resize() {
-	    var width = parseInt(d3.select("#map_container").style("width")) - margin*2,
-	    height = parseInt(d3.select("#map_container").style("height")) - margin*2;    	
+	    var width = parseInt(d3.select("#master_container").style("width")) - margin*2,
+	    height = width / 2;    	
      	// width = $(window).width();
 
-// console.log(path.centroid(d));
+// Smaller viewport
+      if (width <= 600) {
+        var radius = d3.scale.sqrt()  
+          .domain([0, 3000])
+          .range([5, 15]);    
 
-     	projection
-	     	.scale(width)
-	     	.translate([width / 2, height / 2])
+        projection
+          .scale(width * 1.1)
+          .translate([width / 2, height / 2])             
+      } else {
+        var radius = d3.scale.sqrt()  
+          .domain([0, 1000])
+          .range([10, 25]); 
+
+        projection
+          .scale(width)
+          .translate([width / 2, height / 2])   
+      };
+
+      legend        
+        .attr("transform", "translate(" + (width - 55) + "," + (height - 20) + ")");
+
+      legend.selectAll("circle")
+        .attr("cy", function(d) { return -radius(d); })
+        .attr("r", radius);
+
+      legend.selectAll("text")
+        .attr("y", function(d) { return -2 * radius(d); });
+
 
     	svg.selectAll('path.state')
     		.attr("d", path);
@@ -84,16 +106,13 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
     	svg.selectAll("circle.bubble")
     		.data(topojson.feature(us, us.objects.us_10m).features
           .sort(function(a, b) { return b.properties.total - a.properties.total; }))
-			.attr("transform", function(d) { 
-				// console.log(path.centroid(d));
-  			return "translate(" + path.centroid(d) + ")"; })
-  		.attr("r", function(d) { return radius(d.properties.total)});
+        .attr("transform", function(d) { 
+          return "translate(" + path.centroid(d) + ")"; })
+        .attr("r", function(d) { return radius(d.properties.total)});
 
-
-	    console.log(width);
-	    console.log(height)
     }
    	resize();
     d3.select(window).on('resize', resize); 
-    	resize();
+    resize(); 
+    // Need both resizes???????
 	});
