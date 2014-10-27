@@ -1,23 +1,34 @@
-/********************************************
+body {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 12px;
+  background-color: #fefefe;
+  height: 1000px;
+  margin: 0;
+  overflow: hidden;
+}
 
-	Styles to be added to energy.gov in order 
-	to allow it to look however you want it.
-	Reminder: make it responsive
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #555;
+  shape-rendering: crispEdges;
+}
 
-********************************************/
+.axis text {
+  fill: #555;
+}
 
+.line {
+  fill: none;
+  stroke: #ef0d0c;
+  stroke-width: 1.5px;
+}
 
-/*+++++++++++++++++++++++++++
-Map
-++++++++++++++++++++++++++++++++++++++*/
- #master_container {
- 	font-family: 'Avenir LT W02 35 Light',verdana,sans-serif;
-    text-transform: none !important;
-    position: relative;
-    width: 100%;
-    height: 800px;
- }
- #map { position:absolute; top:0; height: 500px; width:100%;}
+#map_container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
 
 
 /* D3 stuff */
