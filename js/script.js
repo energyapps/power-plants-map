@@ -115,21 +115,38 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
     }
 
-    function tooltip(d) {
-      d3.select("#tooltip").remove();
-      
+    function tooltip(d) {      
+        d3.select("#tooltip").remove();
 
       centroid = path.centroid(d);
-      // console.log(centroid[0])
 
-      svg.append("text")
+      if (centroid[1] < 250) {
+        centroid_adjusted = [(centroid[0]-100),(centroid[1]+25)]  
+      } else {
+        centroid_adjusted = [(centroid[0]-100),(centroid[1]-225)]  
+      };
+      
+
+      var tooltipContainer = svg.append("rect")
         .attr("id", "tooltip")
         .attr("transform", function() { 
-            return "translate(" + centroid + ")"; })
+            return "translate(" + centroid_adjusted + ")"; })
+        .attr("width",200)
+        .attr("height", 200)
+    .attr("rx", 6)
+    .attr("ry", 6)
+        // .attr("fill", "brown");
+
+
+      tooltipContainer
+        .append("text")
+        .attr("fill", "white")
+          .html(function(d) {
+    return "<strong>Frequency:</strong> <span style='color:red'>100 greand</span>";
+  })
         .attr("font-size", "11px")
-        .attr("font-weight", "bold")
-        .attr("fill", "black")
-        .text(d.properties.biofuels);
+        .attr("font-weight", "bold");
+        
 
 
 
@@ -147,6 +164,10 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
    	resize();
     d3.select(window).on('resize', resize); 
     d3.selectAll("circle.bubble").on('mouseover', tooltip);      
+    // d3.select("#master_container").on('mouseover', function() {
+    //   d3.select("#tooltip").remove();
+    //   console.log('h')
+    // })
     resize(); 
     // Need both resizes???????
 	});

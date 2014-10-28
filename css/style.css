@@ -77,15 +77,12 @@
   line-height: 1;
   font-weight: bold;
   padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
+  fill: rgba(0,0,0,0.8);
   border-radius: 2px;
-  width: 100px;
-  height: 100px;
 }
 
 /* Creates a small triangle extender for the tooltip */
-#tooltip:after {
+/*#tooltip:after {
   box-sizing: border-box;
   display: inline;
   font-size: 10px;
@@ -95,11 +92,11 @@
   content: "\25BC";
   position: absolute;
   text-align: center;
-}
+}*/
 
 /* Style northward tooltips differently */
-#tooltip.n:after {
+/*#tooltip.n:after {
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
-}
+}*/
