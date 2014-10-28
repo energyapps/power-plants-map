@@ -25,9 +25,9 @@ var radius = d3.scale.sqrt()
 
 var legend = svg.append("g")
     .attr("class", "legend")    
-  .selectAll("g")
-    .data([1000, 3000, 6000])
-  .enter().append("g");
+    .selectAll("g")
+      .data([1000, 5000, 20000])
+      .enter().append("g");
 
 legend.append("circle")
 
@@ -54,8 +54,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
   .selectAll("circle")
     .data(topojson.feature(us, us.objects.us_10m).features)
   .enter().append("circle")
-    .attr("class","bubble")
-    .attr("text", function(d){ return d.properties.name});
+    .attr("class","bubble");    
     // .attr("transform", function(d) { 
     // 	return "translate(" + path.centroid(d) + ")"; })
     // .attr("r", function(d) { return radius(d.properties.total)})
@@ -66,9 +65,10 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 	    var width = parseInt(d3.select("#master_container").style("width")) - margin*2,
 	    height = width / 2;    	
      	// width = $(window).width();
+      console.log(width)
 
-// Smaller viewport
-      if (width <= 600) {
+    // Smaller viewport
+      if (width <= 200) {
         var radius = d3.scale.sqrt()  
           .domain([0, 3000])
           .range([5, 15]);    
@@ -76,10 +76,12 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         projection
           .scale(width * 1.1)
           .translate([width / 2, height / 2])             
-      } else {
+      } 
+      // full viewport
+      else {
         var radius = d3.scale.sqrt()  
           .domain([0, 1000])
-          .range([10, 25]); 
+          .range([(width / 110), (width / 45)]); 
 
         projection
           .scale(width)
@@ -94,7 +96,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .attr("r", radius);
 
       legend.selectAll("text")
-        .attr("y", function(d) { return -2 * radius(d); });
+        .attr("y", function(d) { return -2 * radius(d); }); 
 
 
     	svg.selectAll('path.state')
@@ -108,11 +110,43 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
           .sort(function(a, b) { return b.properties.total - a.properties.total; }))
         .attr("transform", function(d) { 
           return "translate(" + path.centroid(d) + ")"; })
-        .attr("r", function(d) { return radius(d.properties.total)});
+        .attr("r", function(d) { return radius(d.properties.total)})
+        .attr("text", function(d){ return d.properties.name});
 
     }
+
+    function tooltip(d) {
+      d3.select("#tooltip").remove();
+      
+
+      centroid = path.centroid(d);
+      // console.log(centroid[0])
+
+      svg.append("text")
+        .attr("id", "tooltip")
+        .attr("transform", function() { 
+            return "translate(" + centroid + ")"; })
+        .attr("font-size", "11px")
+        .attr("font-weight", "bold")
+        .attr("fill", "black")
+        .text(d.properties.biofuels);
+
+
+
+
+      // Add a tooltip a bit higher than centroid
+      // find centroid XX
+      // destroy previous D3 item
+      // Build new d3 block with a pie chart in it.
+
+      // If its mobile????? move it to the bottom
+
+
+    }
+
    	resize();
     d3.select(window).on('resize', resize); 
+    d3.selectAll("circle.bubble").on('mouseover', tooltip);      
     resize(); 
     // Need both resizes???????
 	});
