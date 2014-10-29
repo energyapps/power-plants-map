@@ -81,6 +81,13 @@
   border-radius: 2px;
 }
 
+.tip-text {
+  fill: #fff;
+  font-size: 16px;
+  font-family: "Avenir LT W02 85 Heavy",verdana,sans-serif; 
+  text-anchor: middle; 
+}
+
 /* Creates a small triangle extender for the tooltip */
 /*#tooltip:after {
   box-sizing: border-box;

@@ -16,7 +16,7 @@ var svg = d3.select("#map_container")
     .attr("width", width + margin*2)
     .attr("height", height + margin*2);
 
-var radius = d3.scale.sqrt()
+var radius2 = d3.scale.sqrt()
     .domain([0, 1000])
     .range([10, 25]);
     // .domain([0, 3000])
@@ -28,6 +28,21 @@ var legend = svg.append("g")
     .selectAll("g")
       .data([1000, 5000, 20000])
       .enter().append("g");
+
+// Pie chart parameters
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+var radius = 100;
+var arc = d3.svg.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+var pie = d3.layout.pie()
+    .sort(null)
+    .value (function(d){ return d.value; });
+
+
 
 legend.append("circle")
 
@@ -65,11 +80,10 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 	    var width = parseInt(d3.select("#master_container").style("width")) - margin*2,
 	    height = width / 2;    	
      	// width = $(window).width();
-      console.log(width)
 
     // Smaller viewport
       if (width <= 200) {
-        var radius = d3.scale.sqrt()  
+        var radius2 = d3.scale.sqrt()  
           .domain([0, 3000])
           .range([5, 15]);    
 
@@ -79,7 +93,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
       } 
       // full viewport
       else {
-        var radius = d3.scale.sqrt()  
+        var radius2 = d3.scale.sqrt()  
           .domain([0, 1000])
           .range([(width / 110), (width / 45)]); 
 
@@ -92,11 +106,11 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .attr("transform", "translate(" + (width - 55) + "," + (height - 20) + ")");
 
       legend.selectAll("circle")
-        .attr("cy", function(d) { return -radius(d); })
-        .attr("r", radius);
+        .attr("cy", function(d) { return -radius2(d); })
+        .attr("r", radius2);
 
       legend.selectAll("text")
-        .attr("y", function(d) { return -2 * radius(d); }); 
+        .attr("y", function(d) { return -2 * radius2(d); }); 
 
 
     	svg.selectAll('path.state')
@@ -110,51 +124,81 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
           .sort(function(a, b) { return b.properties.total - a.properties.total; }))
         .attr("transform", function(d) { 
           return "translate(" + path.centroid(d) + ")"; })
-        .attr("r", function(d) { return radius(d.properties.total)})
+        .attr("r", function(d) { return radius2(d.properties.total)})
         .attr("text", function(d){ return d.properties.name});
 
     }
 
-    function tooltip(d) {      
+    function tooltip(d) {     
+    width = parseInt(d3.select("#master_container").style("width")) - margin*2,
+     
+      console.log(width)
         d3.select("#tooltip").remove();
+        d3.selectAll(".arc").remove();
+      
+      var data = d;
+      centroid = path.centroid(data);
 
-      centroid = path.centroid(d);
+// Create array for pie charts here!!!!!!!!!!!!!!!!!!!!!!! put in memory and use laterZZzzzZzzZzzzZZzzZZZz
+      var data_array = [{type: "biofuels", value: data.properties.biofuels},
+        {type: "coal", value: data.properties.coal},
+        {type: "crude", value: data.properties.crude},
+        {type: "nat_gas", value: data.properties.nat_gas},
+        {type: "nuclear", value: data.properties.nuclear},
+        {type: "o_renew", value: data.properties.o_renew},
+        {type: "t_renew", value: data.properties.t_renew}];
 
       if (centroid[1] < 250) {
-        centroid_adjusted = [(centroid[0]-100),(centroid[1]+25)]  
+        centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
+        tip_text  = [(centroid[0]),(centroid[1]+45)];
+        pie_center = [(centroid[0]),(centroid[1]+150)];
       } else {
-        centroid_adjusted = [(centroid[0]-100),(centroid[1]-225)]  
+        centroid_adjusted = [(centroid[0]-radius),(centroid[1]-250)];
+        tip_text  = [(centroid[0]),(centroid[1]-225)];
+        pie_center = [(centroid[0]),(centroid[1]-125)];
       };
       
 
-      var tooltipContainer = svg.append("rect")
+      var tooltipContainer = svg.append("g")
         .attr("id", "tooltip")
+      .append("rect")
+        // .attr("id", "tooltip")
         .attr("transform", function() { 
-            return "translate(" + centroid_adjusted + ")"; })
-        .attr("width",200)
-        .attr("height", 200)
-    .attr("rx", 6)
-    .attr("ry", 6)
+          return "translate(" + centroid_adjusted + ")"; })
+        .attr("width", (radius * 2))
+        .attr("height", (radius * 2 + 25))
+        .attr("rx", 6)
+        .attr("ry", 6)
         // .attr("fill", "brown");
 
-
-      tooltipContainer
+// tip title
+      d3.select("#tooltip")
         .append("text")
-        .attr("fill", "white")
-          .html(function(d) {
-    return "<strong>Frequency:</strong> <span style='color:red'>100 greand</span>";
-  })
-        .attr("font-size", "11px")
-        .attr("font-weight", "bold");
-        
+        .attr("class","tip-text")
+        .text(function(d){
+            return data.properties.name;
+        })
+        .attr("transform", function() { 
+          return "translate(" + tip_text + ")"; });
 
+// Pie chart
 
+      var g = svg.selectAll(".arc")
+          .data(pie(data_array))
+        .enter().append("g")
+          .attr("class", "arc")
+          .attr("transform", function() { 
+          return "translate(" + pie_center + ")"; });
 
+      g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d) { return color(d.data.type); });
 
-      // Add a tooltip a bit higher than centroid
-      // find centroid XX
-      // destroy previous D3 item
-      // Build new d3 block with a pie chart in it.
+      g.append("text")
+        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+        .attr("dy", ".35em")
+        .style("text-anchor", "middle")
+        .text(function(d) { return d.data.type; });
 
       // If its mobile????? move it to the bottom
 
