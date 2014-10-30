@@ -40,7 +40,15 @@ var arc = d3.svg.arc()
 
 var pie = d3.layout.pie()
     .sort(null)
-    .value (function(d){ return d.value; });
+    .value (function(d){  
+    console.log(d.value) 
+    return d.value;   
+      // if (d.value > 1) {
+      //   return d.value;   
+      // };
+
+      //Trying to figure out a way to prune results.
+    });
 
 
 
@@ -136,6 +144,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         d3.select("#tooltip").remove();
         d3.selectAll(".arc").remove();
         d3.selectAll(".tip-text").remove();
+        d3.selectAll(".tip-text2").remove();
       
       var data = d;
       centroid = path.centroid(data);
@@ -152,10 +161,12 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
       if (centroid[1] < 250) {
         centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
         tip_text  = [(centroid[0]),(centroid[1]+45)];
+        tip_text2  = [(centroid[0]),(centroid[1]+65)];
         pie_center = [(centroid[0]),(centroid[1]+(radius + 65))];
       } else {
         centroid_adjusted = [(centroid[0]-radius),(centroid[1]-(2 * radius + 65))];
         tip_text  = [(centroid[0]),(centroid[1]-(radius * 2 + 45))];
+        tip_text2  = [(centroid[0]),(centroid[1]-(radius * 2 + 25))];
         pie_center = [(centroid[0]),(centroid[1]-(105))];
       };
       
@@ -182,6 +193,16 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .attr("transform", function() { 
           return "translate(" + tip_text + ")"; });
 
+      svg
+        .append("text")
+        .attr("class","tip-text2")
+        // .attr("class","tip-text2")
+        .text(function(d){
+            return "Total: " + data.properties.total + " BTU";
+        })
+        .attr("transform", function() { 
+          return "translate(" + tip_text2 + ")"; });
+
 // Pie chart
 
       var g = svg.selectAll(".arc")
@@ -195,11 +216,11 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .attr("d", arc)
         .style("fill", function(d) { return color(d.data.type); });
 
-      g.append("text")
-        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", ".35em")
-        .style("text-anchor", "middle")
-        .text(function(d) { return d.data.type; });
+      // g.append("text")
+      //   .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+      //   .attr("dy", ".35em")
+      //   .style("text-anchor", "middle")
+      //   .text(function(d) { return d.data.type; });
 
       // If its mobile????? move it to the bottom
 
