@@ -33,10 +33,10 @@ var legend = svg.append("g")
 var color = d3.scale.ordinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
-var radius = 100;
+var radius = 80;
 var arc = d3.svg.arc()
     .outerRadius(radius - 10)
-    .innerRadius(0);
+    .innerRadius(30);
 
 var pie = d3.layout.pie()
     .sort(null)
@@ -131,10 +131,11 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
     function tooltip(d) {     
     width = parseInt(d3.select("#master_container").style("width")) - margin*2,
-     
+
       console.log(width)
         d3.select("#tooltip").remove();
         d3.selectAll(".arc").remove();
+        d3.selectAll(".tip-text").remove();
       
       var data = d;
       centroid = path.centroid(data);
@@ -145,17 +146,17 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         {type: "crude", value: data.properties.crude},
         {type: "nat_gas", value: data.properties.nat_gas},
         {type: "nuclear", value: data.properties.nuclear},
-        {type: "o_renew", value: data.properties.o_renew},
-        {type: "t_renew", value: data.properties.t_renew}];
+        {type: "o_renew", value: data.properties.o_renew}];
+        // {type: "t_renew", value: data.properties.t_renew}];
 
       if (centroid[1] < 250) {
         centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
         tip_text  = [(centroid[0]),(centroid[1]+45)];
-        pie_center = [(centroid[0]),(centroid[1]+150)];
+        pie_center = [(centroid[0]),(centroid[1]+(radius + 65))];
       } else {
-        centroid_adjusted = [(centroid[0]-radius),(centroid[1]-250)];
-        tip_text  = [(centroid[0]),(centroid[1]-225)];
-        pie_center = [(centroid[0]),(centroid[1]-125)];
+        centroid_adjusted = [(centroid[0]-radius),(centroid[1]-(2 * radius + 65))];
+        tip_text  = [(centroid[0]),(centroid[1]-(radius * 2 + 45))];
+        pie_center = [(centroid[0]),(centroid[1]-(105))];
       };
       
 
@@ -166,13 +167,13 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .attr("transform", function() { 
           return "translate(" + centroid_adjusted + ")"; })
         .attr("width", (radius * 2))
-        .attr("height", (radius * 2 + 25))
+        .attr("height", (radius * 2 + 40))
         .attr("rx", 6)
         .attr("ry", 6)
         // .attr("fill", "brown");
 
 // tip title
-      d3.select("#tooltip")
+      svg
         .append("text")
         .attr("class","tip-text")
         .text(function(d){
