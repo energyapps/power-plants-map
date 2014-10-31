@@ -41,7 +41,6 @@ var arc = d3.svg.arc()
 var pie = d3.layout.pie()
     .sort(null)
     .value (function(d){  
-    console.log(d.value) 
     return d.value;   
       // if (d.value > 1) {
       //   return d.value;   
@@ -140,23 +139,15 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
     function tooltip(d) {     
     width = parseInt(d3.select("#master_container").style("width")) - margin*2,
 
-      console.log(width)
         d3.select("#tooltip").remove();
         d3.selectAll(".arc").remove();
         d3.selectAll(".tip-text").remove();
-        d3.selectAll(".tip-text2").remove();
+        d3.selectAll(".tip-text2").remove();        
+        d3.selectAll(".tip-text3").remove();        
+
       
       var data = d;
       centroid = path.centroid(data);
-
-// Create array for pie charts here!!!!!!!!!!!!!!!!!!!!!!! put in memory and use laterZZzzzZzzZzzzZZzzZZZz
-      var data_array = [{type: "biofuels", value: data.properties.biofuels},
-        {type: "coal", value: data.properties.coal},
-        {type: "crude", value: data.properties.crude},
-        {type: "nat_gas", value: data.properties.nat_gas},
-        {type: "nuclear", value: data.properties.nuclear},
-        {type: "o_renew", value: data.properties.o_renew}];
-        // {type: "t_renew", value: data.properties.t_renew}];
 
       if (centroid[1] < 250) {
         centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
@@ -169,7 +160,15 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         tip_text2  = [(centroid[0]),(centroid[1]-(radius * 2 + 25))];
         pie_center = [(centroid[0]),(centroid[1]-(105))];
       };
-      
+
+// Create array for pie charts here!!!!!!!!!!!!!!!!!!!!!!! put in memory and use laterZZzzzZzzZzzzZZzzZZZz
+      var data_array = [{type: "biofuels", value: data.properties.biofuels, x:centroid_adjusted[0], y:centroid_adjusted[1]},
+        {type: "Coal", value: data.properties.coal, x:centroid_adjusted[0], y:centroid_adjusted[1]},
+        {type: "Crude", value: data.properties.crude, x:centroid_adjusted[0], y:centroid_adjusted[1]},
+        {type: "Natural Gas", value: data.properties.nat_gas, x:centroid_adjusted[0], y:centroid_adjusted[1]},
+        {type: "Nuclear", value: data.properties.nuclear, x:centroid_adjusted[0], y:centroid_adjusted[1]},
+        {type: "Other Renewable Energy", value: data.properties.o_renew, x:centroid_adjusted[0], y:centroid_adjusted[1]}];
+        // {type: "t_renew", value: data.properties.t_renew}];    
 
       var tooltipContainer = svg.append("g")
         .attr("id", "tooltip")
@@ -178,7 +177,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .attr("transform", function() { 
           return "translate(" + centroid_adjusted + ")"; })
         .attr("width", (radius * 2))
-        .attr("height", (radius * 2 + 40))
+        .attr("height", (radius * 2 + 50))
         .attr("rx", 6)
         .attr("ry", 6)
         // .attr("fill", "brown");
@@ -224,12 +223,43 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
       // If its mobile????? move it to the bottom
 
-
+    d3.selectAll("g.arc").on('mouseover', arctip);      
     }
+
+    function arctip(d) { 
+    d3.selectAll(".tip-text3").remove();
+
+      // console.log(d)
+      var tip_data = d.data
+      console.log(tip_data.x);
+      console.log(tip_data.y);
+
+      var tip_position = [(tip_data.x + 80),(tip_data.y + 205)];
+              // centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
+      console.log(tip_position);
+      // console.log(tip_data.type + ": " + tip_data.value + " BTU")
+      
+      console.log(d)
+
+       svg
+        .append("text")
+        .attr("class","tip-text3")
+        .text(function(d){
+            return tip_data.type + ": " + tip_data.value + " BTU";
+        })
+        .attr("transform", function() { 
+          return "translate(" + tip_position + ")"; });
+        }
+    // }        centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
+
 
    	resize();
     d3.select(window).on('resize', resize); 
-    d3.selectAll("circle.bubble").on('mouseover', tooltip);      
+    d3.selectAll("circle.bubble").on('mouseover', tooltip);
+
+       // Doesn't work the below vvvv
+    // d3.selectAll("g.arc").on('mouseout', function(){d3.selectAll(".tip-text2").remove();})
+
     // d3.select("#master_container").on('mouseover', function() {
     //   d3.select("#tooltip").remove();
     //   console.log('h')
