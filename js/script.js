@@ -26,7 +26,7 @@ var radius2 = d3.scale.sqrt()
 var legend = svg.append("g")
     .attr("class", "legend")    
     .selectAll("g")
-      .data([1000, 5000, 20000])
+      .data([1000, 5000, 10000])
       .enter().append("g");
 
 // Pie chart parameters
@@ -150,19 +150,19 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
       centroid = path.centroid(data);
 
       if (centroid[1] < 250) {
-        centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
+        centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]+25)];
         tip_text  = [(centroid[0]),(centroid[1]+45)];
         tip_text2  = [(centroid[0]),(centroid[1]+65)];
         pie_center = [(centroid[0]),(centroid[1]+(radius + 65))];
       } else {
-        centroid_adjusted = [(centroid[0]-radius),(centroid[1]-(2 * radius + 65))];
+        centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]-(2 * radius + 65))];
         tip_text  = [(centroid[0]),(centroid[1]-(radius * 2 + 45))];
         tip_text2  = [(centroid[0]),(centroid[1]-(radius * 2 + 25))];
         pie_center = [(centroid[0]),(centroid[1]-(105))];
       };
 
 // Create array for pie charts here!!!!!!!!!!!!!!!!!!!!!!! put in memory and use laterZZzzzZzzZzzzZZzzZZZz
-      var data_array = [{type: "biofuels", value: data.properties.biofuels, x:centroid_adjusted[0], y:centroid_adjusted[1]},
+      var data_array = [{type: "Biofuels", value: data.properties.biofuels, x:centroid_adjusted[0], y:centroid_adjusted[1]},
         {type: "Coal", value: data.properties.coal, x:centroid_adjusted[0], y:centroid_adjusted[1]},
         {type: "Crude", value: data.properties.crude, x:centroid_adjusted[0], y:centroid_adjusted[1]},
         {type: "Natural Gas", value: data.properties.nat_gas, x:centroid_adjusted[0], y:centroid_adjusted[1]},
@@ -176,7 +176,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         // .attr("id", "tooltip")
         .attr("transform", function() { 
           return "translate(" + centroid_adjusted + ")"; })
-        .attr("width", (radius * 2))
+        .attr("width", (radius * 2 + 10))
         .attr("height", (radius * 2 + 50))
         .attr("rx", 6)
         .attr("ry", 6)
@@ -203,15 +203,25 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
           return "translate(" + tip_text2 + ")"; });
 
 
-var tip_position = [(centroid_adjusted[0] + 80),(centroid_adjusted[1] + 205)];
+var tip_position = [(centroid_adjusted[0] + 85),(centroid_adjusted[1] + 205)];
 
-      svg
-        .append("text")
-        .attr("class","tip-text3")
-        // .attr("class","tip-text2")
-        .text("Hover for more info")
-        .attr("transform", function() { 
-          return "translate(" + tip_position + ")"; });        
+      var toolbody = svg.append("text")
+                      .attr("class","tip-text3")
+                      .attr("transform", function() { 
+                        return "translate(" + tip_position + ")"; });
+
+          toolbody
+            .append("tspan")
+            .text("Hover over pie chart ")
+            .attr("x",0)
+            .attr("y",0);
+
+          toolbody
+            .append("tspan")
+            .text("for more information")
+            .attr("x",0)
+            .attr("y",15);
+          
 
 // Pie chart
 
@@ -244,16 +254,27 @@ var tip_position = [(centroid_adjusted[0] + 80),(centroid_adjusted[1] + 205)];
        
     var tip_data = d.data
 
-    var tip_position = [(tip_data.x + 80),(tip_data.y + 205)];
+    var tip_position = [(tip_data.x + 85),(tip_data.y + 205)];
 
-       svg
+       var toolbody = svg
         .append("text")
         .attr("class","tip-text3")
-        .text(function(d){
-            return tip_data.type + ": " + tip_data.value + " BTU";
-        })
         .attr("transform", function() { 
           return "translate(" + tip_position + ")"; });
+
+      toolbody.append("tspan")
+        .text(function(d){
+          return tip_data.type + ":"
+        })
+        .attr("x",0)
+        .attr("y",0);
+
+      toolbody.append("tspan")      
+        .text(function(d){
+            return tip_data.value + " BTU";
+        })
+        .attr("x",0)
+        .attr("y",15);
       }
     // }        centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
 
