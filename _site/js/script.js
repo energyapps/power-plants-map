@@ -110,7 +110,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
       };
 
       legend        
-        .attr("transform", "translate(" + (width - 55) + "," + (height - 20) + ")");
+        .attr("transform", "translate(" + (width - 65) + "," + (height - 15) + ")");
 
       legend.selectAll("circle")
         .attr("cy", function(d) { return -radius2(d); })
@@ -155,10 +155,10 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         tip_text2  = [(centroid[0]),(centroid[1]+65)];
         pie_center = [(centroid[0]),(centroid[1]+(radius + 65))];
       } else {
-        centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]-(2 * radius + 65))];
-        tip_text  = [(centroid[0]),(centroid[1]-(radius * 2 + 45))];
-        tip_text2  = [(centroid[0]),(centroid[1]-(radius * 2 + 25))];
-        pie_center = [(centroid[0]),(centroid[1]-(105))];
+        centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]-(2 * radius + 80))];
+        tip_text  = [(centroid[0]),(centroid[1]-(radius * 2 + 60))];
+        tip_text2  = [(centroid[0]),(centroid[1]-(radius * 2 + 40))];
+        pie_center = [(centroid[0]),(centroid[1]-(120))];
       };
 
 // Create array for pie charts here!!!!!!!!!!!!!!!!!!!!!!! put in memory and use laterZZzzzZzzZzzzZZzzZZZz
@@ -177,7 +177,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .attr("transform", function() { 
           return "translate(" + centroid_adjusted + ")"; })
         .attr("width", (radius * 2 + 10))
-        .attr("height", (radius * 2 + 50))
+        .attr("height", (radius * 2 + 65))
         .attr("rx", 6)
         .attr("ry", 6)
         // .attr("fill", "brown");
