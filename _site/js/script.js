@@ -202,6 +202,17 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .attr("transform", function() { 
           return "translate(" + tip_text2 + ")"; });
 
+
+var tip_position = [(centroid_adjusted[0] + 80),(centroid_adjusted[1] + 205)];
+
+      svg
+        .append("text")
+        .attr("class","tip-text3")
+        // .attr("class","tip-text2")
+        .text("Hover for more info")
+        .attr("transform", function() { 
+          return "translate(" + tip_position + ")"; });        
+
 // Pie chart
 
       var g = svg.selectAll(".arc")
@@ -223,23 +234,17 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
       // If its mobile????? move it to the bottom
 
+
+
     d3.selectAll("g.arc").on('mouseover', arctip);      
     }
 
     function arctip(d) { 
     d3.selectAll(".tip-text3").remove();
+       
+    var tip_data = d.data
 
-      // console.log(d)
-      var tip_data = d.data
-      console.log(tip_data.x);
-      console.log(tip_data.y);
-
-      var tip_position = [(tip_data.x + 80),(tip_data.y + 205)];
-              // centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
-      console.log(tip_position);
-      // console.log(tip_data.type + ": " + tip_data.value + " BTU")
-      
-      console.log(d)
+    var tip_position = [(tip_data.x + 80),(tip_data.y + 205)];
 
        svg
         .append("text")
@@ -249,7 +254,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         })
         .attr("transform", function() { 
           return "translate(" + tip_position + ")"; });
-        }
+      }
     // }        centroid_adjusted = [(centroid[0]-radius),(centroid[1]+25)];
 
 

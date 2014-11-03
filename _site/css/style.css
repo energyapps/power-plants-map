@@ -118,6 +118,15 @@
   stroke: #fff;
 }
 
+.arc path:hover {
+    cursor: pointer;
+}
+
+.arc :hover {
+  cursor: pointer;
+
+}
+
 /* Creates a small triangle extender for the tooltip */
 /*#tooltip:after {
   box-sizing: border-box;
