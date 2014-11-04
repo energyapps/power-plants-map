@@ -90,13 +90,13 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
     // Smaller viewport
       if (width <= 200) {
-        var radius2 = d3.scale.sqrt()  
-          .domain([0, 3000])
-          .range([5, 15]);    
+        // var radius2 = d3.scale.sqrt()  
+        //   .domain([0, 3000])
+        //   .range([5, 15]);    
 
-        projection
-          .scale(width * 1.1)
-          .translate([width / 2, height / 2])             
+        // projection
+        //   .scale(width * 1.1)
+        //   .translate([width / 2, height / 2])             
       } 
       // full viewport
       else {
@@ -138,7 +138,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
     function tooltip(d) {     
     width = parseInt(d3.select("#master_container").style("width")) - margin*2,
-    console.log(width)
+    // console.log(width)
 
 
         d3.select("#tooltip").remove();
@@ -151,21 +151,26 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
       var data = d;
       centroid = path.centroid(data);
 
-    if (width > 600) {  
+    if (width > 700) {  
       if (centroid[1] < 250) {
         centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]+25)];
       } else {
         centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]-(2 * radius + 80))];
       };
     }
+    // else {
+    //   if (centroid[0] < 250) {
+    //     centroid_adjusted = [(centroid[0] + 30),(centroid[1] - radius)];        
+    //     console.log(height)        
+    //   } else {
+    //     centroid_adjusted = [(centroid[0] - 190),(centroid[1] - radius)];
+    //     console.log(height)        
+    //   };
     else {
       if (centroid[0] < 250) {
-        centroid_adjusted = [(centroid[0] + 30),(centroid[1] - radius)];
-        console.log(width)
-        console.log(centroid[0])
+        centroid_adjusted = [(width - 175),(5)];        
       } else {
-        centroid_adjusted = [(centroid[0] - 190),(centroid[1] - radius)];
-        console.log(width)
+        centroid_adjusted = [(5),(5)];               
       };
     };
 
