@@ -89,25 +89,33 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
      	// width = $(window).width();
 
     // Smaller viewport
-      if (width <= 200) {
-        // var radius2 = d3.scale.sqrt()  
-        //   .domain([0, 3000])
-        //   .range([5, 15]);    
+      // if (width <= 200) {
+      //   // var radius2 = d3.scale.sqrt()  
+      //   //   .domain([0, 3000])
+      //   //   .range([5, 15]);    
 
-        // projection
-        //   .scale(width * 1.1)
-        //   .translate([width / 2, height / 2])             
-      } 
-      // full viewport
-      else {
+      //   // projection
+      //   //   .scale(width * 1.1)
+      //   //   .translate([width / 2, height / 2])             
+      // } 
+      // // full viewport
+      // else {
+      //   var radius2 = d3.scale.sqrt()  
+      //     .domain([0, 1000])
+      //     .range([(width / 110), (width / 45)]); 
+
+      //   projection
+      //     .scale(width)
+      //     .translate([width / 2, height / 2])   
+      // };
+
         var radius2 = d3.scale.sqrt()  
           .domain([0, 1000])
           .range([(width / 110), (width / 45)]); 
 
         projection
           .scale(width)
-          .translate([width / 2, height / 2])   
-      };
+          .translate([width / 2, height / 2])  
 
       legend        
         .attr("transform", "translate(" + (width - 65) + "," + (height - 15) + ")");
@@ -158,14 +166,6 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]-(2 * radius + 80))];
       };
     }
-    // else {
-    //   if (centroid[0] < 250) {
-    //     centroid_adjusted = [(centroid[0] + 30),(centroid[1] - radius)];        
-    //     console.log(height)        
-    //   } else {
-    //     centroid_adjusted = [(centroid[0] - 190),(centroid[1] - radius)];
-    //     console.log(height)        
-    //   };
     else {
       if (centroid[0] < 250) {
         centroid_adjusted = [(width - 175),(5)];        
