@@ -109,6 +109,12 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
           .scale(width)
           .translate([width / 2, height / 2])  
 
+      legend.append("circle")
+
+      legend.append("text")
+          .attr("dy", "1.3em")
+          .text(d3.format(".1s"));
+
       legend        
         .attr("transform", "translate(" + (width - 65) + "," + (height - 15) + ")");
 
