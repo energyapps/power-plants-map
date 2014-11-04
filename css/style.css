@@ -110,6 +110,11 @@
   text-anchor: middle; 
 }
 
+.closer {
+cursor: pointer;
+font-family: "Avenir LT W02 85 Heavy",verdana,sans-serif; 
+}
+
 .arc {
   /*fill-opacity: 0.8;*/
 }
@@ -124,12 +129,11 @@
 
 .arc :hover {
   cursor: pointer;
-
+  fill-opacity: 0.8;
 }
 
 
 /*Responsive*/
-
 @media (max-width:570px){
  #master_container { 
   padding-bottom:75% !important; 
