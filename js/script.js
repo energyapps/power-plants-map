@@ -49,14 +49,6 @@ var pie = d3.layout.pie()
       //Trying to figure out a way to prune results.
     });
 
-
-
-legend.append("circle")
-
-legend.append("text")
-    .attr("dy", "1.3em")
-    .text(d3.format(".1s"));
-
 d3.json("js/us_10m_topo4.json", function(error, us) {
   if (error) return console.error(error);
 
@@ -167,7 +159,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
       };
     }
     else {
-      if (centroid[0] < 250) {
+      if (centroid[0] < width / 2) {
         centroid_adjusted = [(width - 175),(5)];        
       } else {
         centroid_adjusted = [(5),(5)];               
@@ -264,7 +256,7 @@ var tip_position = [(centroid_adjusted[0] + 85),(centroid_adjusted[1] + 205)];
 
 
     d3.selectAll("g.arc").on('mouseover', arctip);      
-    }
+  }
 
     function arctip(d) { 
     d3.selectAll(".tip-text3").remove();
@@ -310,3 +302,5 @@ var tip_position = [(centroid_adjusted[0] + 85),(centroid_adjusted[1] + 205)];
     resize(); 
     // Need both resizes???????
 	});
+
+
