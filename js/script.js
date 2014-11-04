@@ -138,6 +138,8 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
     function tooltip(d) {     
     width = parseInt(d3.select("#master_container").style("width")) - margin*2,
+    console.log(width)
+
 
         d3.select("#tooltip").remove();
         d3.selectAll(".arc").remove();
@@ -149,17 +151,27 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
       var data = d;
       centroid = path.centroid(data);
 
+    if (width > 600) {  
       if (centroid[1] < 250) {
         centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]+25)];
-        tip_text  = [(centroid[0]),(centroid[1]+45)];
-        tip_text2  = [(centroid[0]),(centroid[1]+65)];
-        pie_center = [(centroid[0]),(centroid[1]+(radius + 65))];
       } else {
         centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]-(2 * radius + 80))];
-        tip_text  = [(centroid[0]),(centroid[1]-(radius * 2 + 60))];
-        tip_text2  = [(centroid[0]),(centroid[1]-(radius * 2 + 40))];
-        pie_center = [(centroid[0]),(centroid[1]-(120))];
       };
+    }
+    else {
+      if (centroid[0] < 250) {
+        centroid_adjusted = [(centroid[0] + 30),(centroid[1] - radius)];
+        console.log(width)
+        console.log(centroid[0])
+      } else {
+        centroid_adjusted = [(centroid[0] - 190),(centroid[1] - radius)];
+        console.log(width)
+      };
+    };
+
+        tip_text  = [(centroid_adjusted[0] + radius + 5),(centroid_adjusted[1] + 20)];
+        tip_text2  = [(centroid_adjusted[0] + radius + 5),(centroid_adjusted[1] + 40)];
+        pie_center = [(centroid_adjusted[0] + radius + 5),(centroid_adjusted[1]+(radius + 40))];
 
 // Create array for pie charts here!!!!!!!!!!!!!!!!!!!!!!! put in memory and use laterZZzzzZzzZzzzZZzzZZZz
       var data_array = [{type: "Biofuels", value: data.properties.biofuels, x:centroid_adjusted[0], y:centroid_adjusted[1]},

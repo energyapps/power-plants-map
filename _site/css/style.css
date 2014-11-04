@@ -7,7 +7,7 @@
   padding-bottom:50%;
   width: 100%;
   max-width: 1000px;
-  overflow: hidden;
+  overflow: visible;
   /*border: 1px solid black;*/
 }
 
@@ -32,7 +32,7 @@
   width: 100%;
   height: 100%;
   position: absolute;  
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 
@@ -118,7 +118,7 @@
   stroke: #fff;
 }
 
-.arc path:hover {
+.arc path :hover {
     cursor: pointer;
 }
 
@@ -127,22 +127,23 @@
 
 }
 
-/* Creates a small triangle extender for the tooltip */
-/*#tooltip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
-}*/
 
-/* Style northward tooltips differently */
-/*#tooltip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
-}*/
+/*Responsive*/
+
+@media (max-width:570px){
+ #master_container { 
+  padding-bottom:75% !important; 
+ }
+}
+
+@media (max-width:570px){
+ #master_container { 
+  padding-bottom:75% !important; 
+ }
+}
+
+@media (max-width:480px){
+ #master_container { 
+  padding-bottom:90% !important; 
+ }
+}
