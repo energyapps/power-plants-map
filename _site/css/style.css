@@ -23,7 +23,7 @@
   font-size: 12px;
   background-color: #ddd;
   margin: 0;
-  padding-bottom:50%;
+  padding-bottom:55%;
   width: 100%;
   max-width: 1000px;
   overflow: visible;
@@ -151,12 +151,30 @@ font-family: "Avenir LT W02 85 Heavy",verdana,sans-serif;
   fill-opacity: 0.8;
 }
 
-
 /*Responsive*/
-@media (max-width:570px){
+
+@media (max-width:900px){
  #master_container { 
-  padding-bottom:55% !important; 
+  padding-bottom:58% !important; 
  }
+}
+
+@media (max-width:800px){
+ #master_container { 
+  padding-bottom:65% !important; 
+ }
+}
+
+@media (max-width:700px){
+ #master_container { 
+  padding-bottom:65% !important; 
+ }
+}
+
+@media (max-width:570px){
+/* #master_container { 
+  padding-bottom:55% !important; 
+ }*/
  
  #pre_content h2 {
   font-size: 20px;

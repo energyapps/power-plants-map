@@ -48,7 +48,7 @@ var pie = d3.layout.pie()
 
       //Trying to figure out a way to prune results.
     });
-
+// d3.json("/sites/prod/files/us_10m_topo4.json", function(error, us) {
 d3.json("js/us_10m_topo4.json", function(error, us) {
   if (error) return console.error(error);
 
@@ -81,33 +81,26 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
      	// width = $(window).width();
 
     // Smaller viewport
-      if (width <= 500) {
-        // var radius2 = d3.scale.sqrt()  
-        //   .domain([0, 3000])
-        //   .range([5, 15]);    
+      if (width <= 800) {
+        projection
+          .scale(width * 1.2)
+          .translate([width / 2, ((height / 2) + 45)])             
+      } else if (width <= 900) {
 
         projection
           .scale(width * 1.2)
-          .translate([width / 2, ((height / 2) + 10)])             
+          .translate([width / 2, ((height / 2) + 30)])             
       } 
       // full viewport
       else {
-        // var radius2 = d3.scale.sqrt()  
-        //   .domain([0, 1000])
-        //   .range([(width / 110), (width / 45)]); 
-
         projection
           .scale(width)
-          .translate([width / 2, height / 2])   
+          .translate([width / 2, ((height / 2) + 10)])   
       };
 
         var radius2 = d3.scale.sqrt()  
           .domain([0, 1000])
           .range([(width / 110), (width / 45)]); 
-
-        // projection
-        //   .scale(width)
-        //   .translate([width / 2, height / 2])  
 
       legend.append("circle")
 
@@ -115,13 +108,6 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
           .attr("dy", "1.3em")
           .text(d3.format(".1s"));
 
-// if (width < 500) {
-//   legend        
-//     .attr("transform", "translate(" + (width - 65) + "," + (height - 15) + ")");
-// } else {
-//   legend        
-//     .attr("transform", "translate(" + (width - 65) + "," + (height - 15) + ")");
-// };
   legend        
     .attr("transform", "translate(" + (width - (radius2(10000) + 10)) + "," + (height - 10) + ")");
 
@@ -158,8 +144,15 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
       var data = d;
       centroid = path.centroid(data);
 
-      if (width > 700) {  
+      if (width > 900) {
         if (centroid[1] < 250) {
+          centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]+25)];
+        } else {
+          centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]-(2 * radius + 80))];
+        };        
+      }
+      else if (width > 700) {  
+        if (centroid[1] < 225) {
           centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]+25)];
         } else {
           centroid_adjusted = [(centroid[0]-radius - 5),(centroid[1]-(2 * radius + 80))];
