@@ -1,3 +1,22 @@
+/*Before and after*/
+#pre_content {
+  background-color: #ddd;
+}
+
+#pre_content h2 {
+  font-size: 30px;
+  padding-top: 10px;
+  padding-left: 10px;
+  color: #333;
+  line-height: 30px;
+}
+
+#attribution {
+  position: absolute;
+}
+
+
+/*Map stuff*/
 #master_container
 {
   font-family: 'PT Sans', sans-serif;
@@ -136,18 +155,19 @@ font-family: "Avenir LT W02 85 Heavy",verdana,sans-serif;
 /*Responsive*/
 @media (max-width:570px){
  #master_container { 
-  padding-bottom:75% !important; 
+  padding-bottom:55% !important; 
  }
-}
-
-@media (max-width:570px){
- #master_container { 
-  padding-bottom:75% !important; 
+ 
+ #pre_content h2 {
+  font-size: 20px;
+  padding-top: 5px;
+  padding-left: 5px;
+  line-height: 20px;
  }
 }
 
 @media (max-width:480px){
  #master_container { 
-  padding-bottom:90% !important; 
+  padding-bottom:70% !important; 
  }
 }
