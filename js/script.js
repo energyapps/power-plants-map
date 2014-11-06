@@ -29,9 +29,9 @@ var legend = svg.append("g")
       .data([500, 2000, 5000])
       .enter().append("g");
 
-// Pie chart parameters
+// Pie chart parameters //first 4 colors are bluish and fossil/nuclear, last two are renewable. Add a diff for nuclear, tweak??
 var color = d3.scale.ordinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c"]);
 
 var radius = 80;
 var arc = d3.svg.arc()
@@ -195,11 +195,12 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         tip_close = [(centroid_adjusted[0] + radius + 5),(centroid_adjusted[1]+(radius + 45))];
 
 // Create array for pie charts here!!!!!!!!!!!!!!!!!!!!!!! put in memory and use laterZZzzzZzzZzzzZZzzZZZz
-      var data_array = [{type: "Biofuels", value: data.properties.biofuels, x:centroid_adjusted[0], y:centroid_adjusted[1]},
+      var data_array = [        
         {type: "Coal", value: data.properties.coal, x:centroid_adjusted[0], y:centroid_adjusted[1]},
         {type: "Crude", value: data.properties.crude, x:centroid_adjusted[0], y:centroid_adjusted[1]},
         {type: "Natural Gas", value: data.properties.nat_gas, x:centroid_adjusted[0], y:centroid_adjusted[1]},
         {type: "Nuclear", value: data.properties.nuclear, x:centroid_adjusted[0], y:centroid_adjusted[1]},
+        {type: "Biofuels", value: data.properties.biofuels, x:centroid_adjusted[0], y:centroid_adjusted[1]},
         {type: "Other Renewable Energy", value: data.properties.o_renew, x:centroid_adjusted[0], y:centroid_adjusted[1]}];
         // {type: "t_renew", value: data.properties.t_renew}];    
 
