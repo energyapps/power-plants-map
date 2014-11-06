@@ -335,7 +335,7 @@ var tip_position = [(centroid_adjusted[0] + 85),(centroid_adjusted[1] + 205)];
 
    	resize();
     d3.select(window).on('resize', resize); 
-    d3.selectAll("circle.bubble").on('mouseover', tooltip);
+    d3.selectAll("circle.bubble").on('click', tooltip);
     // d3.selectAll(".closer")
     //   .selectAll('.tip-text2')
     //   .on('click', clickMe)
