@@ -26,7 +26,7 @@ var radius2 = d3.scale.sqrt()
 var legend = svg.append("g")
     .attr("class", "legend")    
     .selectAll("g")
-      .data([1000, 5000, 10000])
+      .data([500, 2000, 5000])
       .enter().append("g");
 
 // Pie chart parameters
@@ -68,11 +68,18 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
   .selectAll("circle")
     .data(topojson.feature(us, us.objects.us_10m).features)
   .enter().append("circle")
-    .attr("class","bubble");    
-    // .attr("transform", function(d) { 
-    // 	return "translate(" + path.centroid(d) + ")"; })
-    // .attr("r", function(d) { return radius(d.properties.total)})
-    // .attr("text", function(d){ return d.properties.name});
+    .attr("class", function(d) {
+       var difference = (d.properties.total - d.properties.consumption)
+
+          if (d.properties.total >= 0) {
+            console.log("positive")
+            return "posB bubble"
+          } else {
+            console.log("negative")
+            return "negB bubble"
+          };
+      
+    });    
 
 
     function resize() {
@@ -100,7 +107,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
 
         var radius2 = d3.scale.sqrt()  
           .domain([0, 1000])
-          .range([(width / 110), (width / 45)]); 
+          .range([(2), (width / 45)]); 
 
       legend.append("circle")
 
@@ -125,12 +132,22 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
     	svg.selectAll('path.state-boundary')
     		.attr("d", path);
 
+
     	svg.selectAll("circle.bubble")
     		.data(topojson.feature(us, us.objects.us_10m).features
           .sort(function(a, b) { return b.properties.total - a.properties.total; }))
         .attr("transform", function(d) { 
           return "translate(" + path.centroid(d) + ")"; })
-        .attr("r", function(d) { return radius2(d.properties.total)})
+        .attr("r", function(d) { 
+          var difference = (d.properties.total - d.properties.consumption)
+          console.log(d.properties.name + ": " + difference);
+          var abs_difference = Math.abs(difference);
+          // console.log(abs_difference);
+
+          return radius2(d.properties.total)
+
+
+        })
         .attr("text", function(d){ return d.properties.name});
 
     }
@@ -212,7 +229,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         .append("text")
         .attr("class","tip-text2")
         .text(function(d){
-            return "Total: " + data.properties.total + " BTU";
+            return "Total: " + data.properties.total + " Trillion BTU";
         })
         .attr("transform", function() { 
           return "translate(" + tip_text2 + ")"; });
@@ -296,7 +313,7 @@ var tip_position = [(centroid_adjusted[0] + 85),(centroid_adjusted[1] + 205)];
 
       toolbody.append("tspan")      
         .text(function(d){
-            return tip_data.value + " BTU";
+            return tip_data.value + " Trillion BTU";
         })
         .attr("x",0)
         .attr("y",15);

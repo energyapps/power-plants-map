@@ -5,10 +5,27 @@
 
 #pre_content h2 {
   font-size: 30px;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 5px;
+  padding-left: 5px;
   color: #333;
   line-height: 30px;
+}
+
+#pre_content h3 {
+  font-size: 20px;
+  padding-top: 5px;
+  padding-left: 5px;
+  color: #333;
+  line-height: 20px;
+}
+
+#pre_content p {
+  font-size: 14px;
+  padding-top: 5px;
+  padding-left: 5px;
+  color: #333;
+  line-height: 14px;
+  margin: 0px;
 }
 
 #attribution {
@@ -76,13 +93,20 @@
   stroke-width: .5px;
   /*fill: #cdd;*/
   fill:#ffb732;
-
 }
 
 .bubbles :hover {
   stroke: #ffb732;
   stroke-width: 3px;
   /*fill: #ff5614;*/
+}
+
+.posB {
+  fill:#ffb732;
+}
+
+.negB {
+  fill: #ADD8E6;
 }
 
 .legend circle {
