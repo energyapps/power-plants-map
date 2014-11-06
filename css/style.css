@@ -99,6 +99,7 @@
   stroke: #ffb732;
   stroke-width: 3px;
   /*fill: #ff5614;*/
+  cursor: pointer;
 }
 
 .posB {
