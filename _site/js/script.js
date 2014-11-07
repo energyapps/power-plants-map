@@ -113,6 +113,10 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
           .attr("dy", "1.3em")
           .text(d3.format(".1s"));
 
+      // legend.append("text")
+      //     .text("BTU")
+      //     .attr("transform", "translate(" + (width - (radius2(10000) + 10)) + "," + (height - 10) + ")");
+
   legend        
     .attr("transform", "translate(" + (width - (radius2(10000) + 10)) + "," + (height - 10) + ")");
 
@@ -190,7 +194,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         tip_text  = [(centroid_adjusted[0] + radius + 5),(centroid_adjusted[1] + 20)];
         tip_text2  = [(centroid_adjusted[0] + radius + 5),(centroid_adjusted[1] + 40)];
         pie_center = [(centroid_adjusted[0] + radius + 5),(centroid_adjusted[1]+(radius + 40))];
-        tip_close = [(centroid_adjusted[0] + radius + 5),(centroid_adjusted[1]+(radius + 45))];
+        tip_close = [(centroid_adjusted[0] + radius*2),(centroid_adjusted[1]+(15))];
 
 // Create array for pie charts here!!!!!!!!!!!!!!!!!!!!!!! put in memory and use laterZZzzzZzzZzzzZZzzZZZz
       var data_array = [        
@@ -240,7 +244,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
         })
           .append("text")
           .attr("class", "tip-text2")
-          .text("CLOSE").on("click", remover);
+          .text("X").on("click", remover);
 
 
 

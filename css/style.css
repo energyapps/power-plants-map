@@ -169,7 +169,10 @@
 
 .closer {
 cursor: pointer;
-font-family: "Avenir LT W02 85 Heavy",verdana,sans-serif; 
+}
+
+.closer :hover {
+  font-family: "Avenir LT W02 85 Heavy",verdana,sans-serif !important;  
 }
 
 .arc {
