@@ -1,3 +1,14 @@
+
+
+#sidebar-right{display:none !important;}.sidebar-second #main-content{width:100% !important;}
+
+
+/*fallback*/
+.fallback {
+    display: none;
+  }
+.fallinner {height: 40px !important;}
+
 /*Before and after*/
 #pre_content {
   background-color: #ddd;
@@ -29,7 +40,9 @@
 }
 
 #attribution {
-  position: relative;
+  position: absolute;
+  bottom:-25px;
+  padding-left: 5px;
 }
 
 
