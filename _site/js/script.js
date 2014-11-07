@@ -72,10 +72,8 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
        var difference = (d.properties.total - d.properties.consumption)
 
           if (d.properties.total >= 0) {
-            console.log("positive")
             return "posB bubble"
           } else {
-            console.log("negative")
             return "negB bubble"
           };
       
@@ -140,7 +138,7 @@ d3.json("js/us_10m_topo4.json", function(error, us) {
           return "translate(" + path.centroid(d) + ")"; })
         .attr("r", function(d) { 
           var difference = (d.properties.total - d.properties.consumption)
-          console.log(d.properties.name + ": " + difference);
+          // console.log(d.properties.name + ": " + difference);
           var abs_difference = Math.abs(difference);
           // console.log(abs_difference);
 
