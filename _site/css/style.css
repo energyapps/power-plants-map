@@ -37,12 +37,17 @@
   color: #333;
   line-height: 14px;
   margin: 0px;
+  padding-bottom: 0px !important;
+  border-bottom: none !important;
+  margin-bottom: 0px !important;
 }
 
 #attribution {
   position: absolute;
-  bottom:-25px;
+  bottom: 0px;
   padding-left: 5px;
+  border-bottom: none !important;
+  color: #333 !important;
 }
 
 
@@ -53,10 +58,11 @@
   font-size: 12px;
   background-color: #ddd;
   margin: 0;
-  padding-bottom:55%;
+  padding-bottom:50.5%;
   width: 100%;
   max-width: 1000px;
   overflow: visible;
+
   /*border: 1px solid black;*/
 }
 
@@ -101,9 +107,9 @@
 }
 
 .bubbles {
-  fill-opacity: .5;
-  stroke: #333;
-  stroke-width: .5px;
+  fill-opacity: .4;
+/*  stroke: #333;
+  stroke-width: .5px;*/
   /*fill: #cdd;*/
   fill:#ffb732;
 }
@@ -116,7 +122,44 @@
 }
 
 .posB {
-  fill:#ffb732;
+  
+  /*fill: #9400f2;*/
+  /*fill: #7237f7;*/
+  /*fill: #6348fd;
+  fill: #5159ff;*/
+  /*fill: #3d63ff;*/
+  /*fill: #527bdd;*/
+  /*fill: #6092b7;*/
+  /*fill: #69a990;*/
+  /*fill: #6cbd63;*/
+  /*fill: #6ed521;*/
+  /*fill: #6deb00;*/
+  /*fill: #9bf500;*/
+  /*fill: #b0fa00;*/
+/*  fill: #cafb00;
+  fill: #e3ff00;
+  fill: #fcff00;
+*//*  fill: #f9f600;
+  fill: #f8e500;
+  fill: #f6d800;
+  fill: #f6cb00;
+  /*fill: #f5b900;*/
+  /*fill: #f4ac00;*/
+  /*fill: #f09800;*/
+  /*fill: #e96e00;*/
+  /*fill: #e45700;*/
+  
+  /*fill: #3d63ff;*/
+  /*fill: #ffb732;*/
+  fill: #6cbd63;
+  /*fill: #831ef5;*/
+  /*fill: #d7000f;*/
+  /*fill: #b0000c;*/
+  /*fill: #D03C87;*/
+/* fill: #87d03c;
+  fill:#3c87d0;
+  fill: #d0853c;
+  fill: #d03c3d;*/
 }
 
 .negB {
@@ -229,4 +272,12 @@ cursor: pointer;
  #master_container { 
   padding-bottom:70% !important; 
  }
+}
+
+/*Fold*/
+#fold {
+    z-index: 30000;
+    right: 0;
+    bottom: 0;
+    position: absolute;
 }

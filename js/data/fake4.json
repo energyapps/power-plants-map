@@ -1,0 +1,101 @@
+[
+  {
+    "question":"Do you know the muffin man?",
+    "ans1":"Yeah, he lives on Drury Lane.",
+    "ans2":"The guy who works at Uprising?",
+    "ans3":"No, I'm on a diet.",
+    "ans4":"Yeah, it's me!",
+    "img":"",
+    "cont":"Well done. You remember your nursery rhymes...or your Shrek."
+  },
+  {
+    "question":"What kind of transportation device does meatcat ride?",
+    "ans1":"Flying Skateboard",
+    "ans2":"Hang-glider",
+    "ans3":"Water Bicycle",
+    "ans4":"Hovercraft",
+    "img":"http://40.media.tumblr.com/tumblr_kxco8hY6Hf1qzmvhdo1_1280.jpg",
+    "cont":"Did you know, Meat Cat's Cheesy Blaster's theme song is as follows...\"You take a hot dog stuff it with some jack cheese wrap it in a pizza! You Got Cheesy Blasters!\""
+  },
+  {
+    "question":"What is Matty's favorite color?",
+    "ans1":"Red",
+    "ans2":"Black",
+    "ans3":"Greene. Get it?!",
+    "ans4":"Silver",
+    "img":"http://upload.wikimedia.org/wikipedia/commons/thumb/3/38/BYR_color_wheel.svg/2000px-BYR_color_wheel.svg.png",
+    "cont":"Matty likes red. It is a good color."
+  },
+  {
+    "question":"Which of the following is NOT a banned word from 2014?",
+    "ans1":"Farfegnugen",
+    "ans2":"Oily Noodle Juice",
+    "ans3":"Dongle",
+    "ans4":"Petaflop",
+    "img":"http://upload.wikimedia.org/wikipedia/commons/2/2d/Xbox_360_Audio_Dongle.jpg",
+    "cont":""
+  },
+  {
+    "question":"What is Dan's favorite kind of sweater?",
+    "ans1":"Trendy slim-cut J. Crew v-neck",
+    "ans2":"Hand-knit wool cable (fisherman or New Zealand sheep-herder style)",
+    "ans3":"Tasteful old man cardigan",
+    "ans4":"Haha, whatever -- Dan hates sweaters",
+    "img":"http://image.pbs.org/video-assets/pbs/pbs/53940/images/Mezzanine_338.jpg",
+    "cont":"Dan is all about the tasteful old man cardigan. Did you know that he first wore one as a newborn? That's right. He came out of the womb wearing the world's most badass old man cardigan."
+  },
+  {
+    "question":"How many licks does it take to get to the center of a Tootsie Pop? (According to Science.)",
+    "ans1":"~1000",
+    "ans2":"~150",
+    "ans3":"~as many as it takes",
+    "ans4":"~3",
+    "img":"http://i.ytimg.com/vi/eUhxm2p0ePM/maxresdefault.jpg",
+    "cont":"Researchers at New YorkUniversity arrived at the number by custom-making their own candy spheres and cylinders to test how materials dissolve in a flow: http://www.livescience.com/49787-how-many-licks-to-reach-center-of-lollipop.html?cmpid=514644_20150212_40380306&adbid=565903230404554752&adbpl=tw&adbpr=123887076"
+  },
+  {
+    "question":"How fast do I go 0 to 100?",
+    "ans1":"Real Quick",
+    "ans2":"About 50 seconds",
+    "ans3":"200 seconds",
+    "ans4":"1 year",
+    "img":"http://www.theprospect.net/wp-content/uploads/2014/05/Screen-shot-2012-10-17-at-8.57.56-PM.png",
+    "cont":"No new friends, we don't play that."
+  },
+  {
+    "question":"What is the name of this 8x NL batting Champ and long time Pittsburgh Pirate manager?",
+    "ans1":"Johannes Peter \"Honus\" Wagner aka \"The Flying Dutchman\"",
+    "ans2":"Cap Anson",
+    "ans3":"Rollie Fingers",
+    "ans4":"Max \"Scoops\" Carey",
+    "img":"http://www.extravaganzi.com/wp-content/uploads/2012/03/Honus-Wagner-Pittsburgh-Pirates-Shortstop.jpg",
+    "cont":"Honus' older brother, Albert, also a major leaguer, was nicknamed \"Butts\". I kid you not."
+  },
+  {
+    "question":"What's your problem, man?",
+    "ans1":"Do you mind?",
+    "ans2":"What's YOUR problem, MAN!?",
+    "ans3":"No way dude, no. way.",
+    "ans4":"Ugh, this again?!",
+    "img":"",
+    "cont":"I can't even"
+  },
+  {
+    "question":"Which of the following is NOT a Ben Dotson quote?",
+    "ans1":"\"Believe it or not, South Central Tennessee has a quite nice porcelain doll cottage industry. We have dolls all over the house.\"",
+    "ans2":"You know, segways just look foolish.",
+    "ans3":"[His shoes] were basically the duck version of vibrams",
+    "ans4":"Indignantly: \"Bach didn't write a requiem, but he did write a beautiful mass in B minor\"",
+    "img":"img/ben.jpg",
+    "cont":"One time, Sugarbear Dotson got so lonesome, he nearly cried."
+  },
+  {
+    "question":"Which of the following is NOT a Rob Roberts quote.",
+    "ans1":"ÒI promised myself I would never take a job like thisÓ [in reference to his first day at DOE]",
+    "ans2":"\"That's by far our most popular PDF on the site.\"",
+    "ans3":"Smirkin, twerkin, and barely workin: the Rob Roberts story",
+    "ans4":"Remember that drunk girl I hung out with at Big Hunt?",
+    "img":"",
+    "cont":"Around Frog Lick, Virginia, there is no word in the local lexicon for North. Their compasses only go East, West, and South."
+  }
+]
