@@ -52,8 +52,8 @@ d3.json("js/data/us_10m_topo_places2.json", function(error, us) {
     .data(topojson.feature(us, us.objects.plants_pre).features
       .sort(function(a, b) { return b.properties.capacity - a.properties.capacity; }))
   .enter().append("circle")
-    .attr("class", function(d) {
-      return "posB bubble"
+  .attr("class", function(d) {
+      return "bubble"
       // var src = d.properties.source;
       // if (
       //   src === "GEO"
@@ -63,7 +63,7 @@ d3.json("js/data/us_10m_topo_places2.json", function(error, us) {
       // } else {
       //   return "negB bubble"
       // };      
-    }); 
+    }); ;    
 
 
     function resize() {
@@ -109,20 +109,44 @@ d3.json("js/data/us_10m_topo_places2.json", function(error, us) {
           var src = d.properties.source;
           // if (src === "LFG") {
           if (src != null) {
-            if (src === null) {
-              console.log('error')
-              // return radius2(40)
+            if (src === null) {            
+              return radius2(40)
             } else {
-              console.log(src)
+              
               var src2 = src;
-              console.log(src2)
+              
               return radius2(d.properties.capacity)
-              // return radius2(4)
+              
             };
           };
           
 
-        });
+        })
+        .attr("class", function(d) {
+          var src = d.properties.source;
+          console.log(src)
+if (src === "ANT" || src === "BIT" || src === "LIG" || src === "SGC" || src === "SUB" || src === "WC" || src === "RC" ) { return "coal"}
+else if (src === "NG" ) { return "gas"}
+else if (src === "DFO" || src === "JF" || src === "KER" || src === "PC" || src === "PG" || src === "RFO" || src === "SGP" || src === "WO") { return "petrol"}
+else if (src === "NUC") { return "nuclear"}
+else if (src === "WAT") { return "water"}
+else if (src === "GEO") { return "geo"}
+else if (src === "WND") { return "wind"}
+else if (src === "SUN") { return "sun"}
+// else { return "other"}
+else { return "clear"}
+
+      // return "posB"
+      // var src = d.properties.source;
+      // if (
+      //   src === "GEO"
+      //   ) {
+      //   console.log(src)
+      //   return "posB bubble"
+      // } else {
+      //   return "negB bubble"
+      // };      
+    }); ;
         // .attr("text", function(d){ return d.properties.name});
 
     }

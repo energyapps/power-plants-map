@@ -58,7 +58,7 @@
   font-size: 12px;
   background-color: #ddd;
   margin: 0;
-  padding-bottom:25.5%;
+  padding-bottom:50.5%;
   width: 100%;
   max-width: 1000px;
   overflow: visible;
@@ -149,17 +149,57 @@
   /*fill: #e96e00;*/
   /*fill: #e45700;*/
   
-  /*fill: #3d63ff;*/
-  /*fill: #ffb732;*/
+  /*fill: #3d63ff;
+  fill: #ffb732;
   fill: #6cbd63;
-  /*fill: #831ef5;*/
-  /*fill: #d7000f;*/
-  /*fill: #b0000c;*/
-  /*fill: #D03C87;*/
-/* fill: #87d03c;
+  fill: #831ef5;
+  fill: #d7000f;
+  fill: #b0000c;
+  fill: #D03C87;
+ fill: #87d03c;
   fill:#3c87d0;
   fill: #d0853c;
   fill: #d03c3d;*/
+}
+
+.clear {
+  fill: transparent;
+}
+
+.coal {
+  fill: #3d63ff;
+}
+
+.gas {
+  fill: #ffb732;
+}
+
+.petrol {
+  fill: #6cbd63;
+}
+
+.nuclear {
+  fill: #831ef5;
+}
+
+.water {
+  fill: #d7000f;
+}
+
+.geo {
+  fill: #b0000c;
+}
+
+.wind {
+  fill: #D03C87;
+}
+
+.sun {
+  fill: #87d03c;
+}
+
+.other {
+  fill:#3c87d0;
 }
 
 .negB {
